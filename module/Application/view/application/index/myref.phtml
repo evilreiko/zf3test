@@ -1,0 +1,240 @@
+<p>inside myref view</p>
+<p>my variable: <?php echo $this->var1; ?> or <?php echo $var1; ?></p>
+<table style="width: 100%; max-width:100%; box-sizing: border-box; table-layout: fixed;" cellpadding='10' cellspacing='10' border='1'>
+    <tr>
+        <th>
+            desc
+        </th>
+        <th>
+            code
+        </th>
+        <th>
+            output
+        </th>
+    </tr>
+    <tr>
+        <td>
+            output const from php file (const variable). can be used in anywhere
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo \Application\Controller\FooController::MY_CONST;
+            </p>
+            <b>namespace\filename</b>, so <b>\Application\Controller</b> is the <b>namespace</b>, and the <b>FooController</b> is the <b>filename</b>
+        </td>
+        <td>
+            <?php echo \Application\Controller\FooController::MY_CONST; ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            output const from php file (function call). can be used in anywhere
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo \Application\Controller\FooController::MY_STATIC_FUNCTION('abc');
+            </p>
+            <b>namespace\filename</b>, so <b>\Application\Controller</b> is the <b>namespace</b>, and the <b>FooController</b> is the <b>filename</b>
+        </td>
+        <td>
+            <?php echo \Application\Controller\FooController::MY_STATIC_FUNCTION('abc'); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            output variable in view that was set in the controller
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $var1;
+            </p>
+            OR
+            <p style='color:blue;'>
+                echo $this->var1;
+            </p>
+        </td>
+        <td>
+            <?php echo $var1; ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            base path path w/o param
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->basePath();
+            </p>
+        </td>
+        <td>
+            <?php echo $this->basePath(); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            base path path w/ param
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->basePath('anystring');
+            </p>
+        </td>
+        <td>
+            <?php echo $this->basePath('anystring'); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            absolute path path w/o param
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->serverUrl();
+            </p>
+        </td>
+        <td>
+            <?php echo $this->serverUrl(); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            absolute path path w/ param
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->serverUrl('anystring');
+            </p>
+        </td>
+        <td>
+            <?php echo $this->serverUrl('anystring'); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            url w/o param
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->url();
+            </p>
+        </td>
+        <td>
+            <?php echo $this->url(); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            url w/ param (by route name)<br/>
+            in module.config.php > routes > route, get the route name "news"
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->url('news');
+            </p>
+        </td>
+        <td>
+           <?php echo $this->url('news'); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            url w/ param (by route name and variables)<br/>
+            in module.config.php > routes > route, get the route name "news" as well as the variables in the route "/news[/:action][/:id]"
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->url('news', ['action' => 'details', 'id' => 42]);
+            </p>
+        </td>
+        <td>
+            <?php echo $this->url('news', ['action' => 'details', 'id' => 42]); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            url w/ param (by route name and variables) and get query<br/>
+            in module.config.php > routes > route, get the route name "news" as well as the variables in the route "/news[/:action][/:id]"
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->url('news', ['action' => 'details', 'id' => 42], ['query' => ['p' => 13], 'fragment' => 'comments']);
+            </p>
+        </td>
+        <td>
+            <?php echo $this->url('news',
+                    ['action' => 'details', 'id' => 42],
+                    [
+                        'query' => ['p' => 13, 'var2' => 'xxx'],
+                        'fragment' => 'comments',
+                        'force_canonical' => true,// this option puts fully-qualified domain url
+                    ]); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            url w/ param (by route name and variables)<br/>
+            in module.config.php > routes > route, get the route name "news" as well as the variables in the route "/news[/:action][/:id]"<br/>
+            use current url route variables (like "action" and "id"). if current route is /news/details/777 , we can pass some or even none of the 2nd params, but without query and fragment (so you inject them if u want):
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->url('news', ['action' => 'details'], null, true);
+            </p>
+        </td>
+        <td>
+            /news/details/777
+        </td>
+    </tr>
+    <tr>
+        <td>
+            render partial view.<br/>
+            note: just create a folder anywhere, for example we created "mypartials" under the /view, maybe typically place them in /view/application/TARGET_VIEW/ as "partials" for that specific view, and another folder in the /view as global partial view to be used by many different views
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->partial('mypartials/mypartialx', ['varx'=>123]);<br/>
+            </p>
+        </td>
+        <td>
+            <?php echo $this->partial('mypartials/mypartialx', ['varx'=>123]); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            capture output (don't print it) and print output later once or multiple times
+        </td>
+        <td>
+            <p style='color:blue;'>
+                $this->placeholder('mycontent')->captureStart();
+            </p>
+            <p>how are u <?php echo 'my friend'; ?>?</p>
+            <p style='color:blue;'>
+                $this->placeholder('mycontent')->captureEnd();
+            </p>
+            <p>hello world</p>
+            <p style='color:blue;'>
+                $this->placeholder('mycontent'); 
+            </p>
+        </td>
+        <td>
+            <?php $this->placeholder('mycontent')->captureStart(); ?>
+            <p>how are u <?php echo 'my friend'; ?>?</p>
+            <?php $this->placeholder('mycontent')->captureEnd(); ?>
+            <p>hello world</p>
+            <?php
+            echo $this->placeholder('mycontent'); 
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            
+        </td>
+        <td>
+            
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+</table>
