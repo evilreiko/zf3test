@@ -36,6 +36,15 @@ class MycustomcontController extends AbstractActionController
         readme($result->current());// current row selected (which is first row), if no row found will return null
         readme($result->next());// bring next row (pointer moves forward). it will not return the row
         readme($result->current());// current row selected (which is 2nd row), if no row found will return null
+        
+        $currentRow = $result->current();
+        
+        // get specific column from row (row is object)
+        readme($currentRow->id);
+        // or convert object to associative array first then use
+        $currentRowArr = (array)$currentRow;
+        readme($currentRowArr['id']);
+        
         return new ViewModel();
     }
     
