@@ -56,6 +56,42 @@ return [
             
             
             // ### CUSTOM ###
+            // TO ADD A CONTROLLER, ADD THIS..
+            // This will add controller Mycustomcont which can be accessed in browser by /application/mycustomcont or /application/mycustomcont/index or application/mycustomcont/mycustomact
+            // Add this route for the MycustomcontController
+            'mycustomcont' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/application/mycustomcont[/:action]',// set the route to your controller to access the controller's actions. it can be '/mycustomcont[/:action]' or even anything
+                    'defaults' => [
+                        'controller'    => Controller\MycustomcontController::class,
+                        'action'        => 'index',// default action if no action set in that route
+                    ],
+                ],
+            ],
+            // ### CUSTOM ###
+            
+            
+            
+            // ### CUSTOM ###
+            // TO ADD A CONTROLLER, ADD THIS..
+            // This will add controller Mycustomcontx which can be accessed in browser by /application/mycustomcontx or /application/mycustomcontx/index or application/mycustomcontx/mycustomactx
+            // Add this route for the MycustomcontxController
+            'mycustomcontx' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/application/mycustomcontx[/:action]',// set the route to your controller to access the controller's actions. it can be '/mycustomcontx[/:action]' or even anything
+                    'defaults' => [
+                        'controller'    => Controller\MycustomcontxController::class,
+                        'action'        => 'index',// default action if no action set in that route
+                    ],
+                ],
+            ],
+            // ### CUSTOM ###
+            
+            
+            
+            // ### CUSTOM ###
             // example route with variable id (there is no controller and action here, just an example for the route)
             'news' => [
                 'type'    => 'segment',
@@ -86,6 +122,30 @@ return [
             Controller\FooController::class => InvokableFactory::class,
             // ### CUSTOM ###
             
+            
+            
+            
+            // ### CUSTOM ###
+            // TO ADD A CONTROLLER, ADD THIS..
+            // this controller will will add a custom factory for it so we can pass the db (from the service manager) to the controller, through custom controller's factory (1. from config, 2. to controller's factory 3. to controller's constructor 4. then we set it as a private variable and can use it in any action)
+            Controller\MycustomcontController::class => Controller\Factory\MycustomcontControllerFactory::class,
+            // ### CUSTOM ###
+            
+            
+            
+            
+            // ### CUSTOM ###
+            // TO ADD A CONTROLLER, ADD THIS..
+            // this controller will will add a custom factory for it so we can pass the db (from the service manager) to the controller, WIHTOUT the need to add/use custom controller's factory
+            Controller\MycustomcontxController::class => function($container) {// $container is actually the service manager
+                //return new Controller\MycustomcontxController($container);// we can return the service manager
+                return new Controller\MycustomcontxController(
+                    $container->get(\Zend\Db\Adapter\Adapter::class)
+                );// this will pass the db adapter to the controller's constructor
+            },
+            // ### CUSTOM ###
+            
+                    
             
             
         ],

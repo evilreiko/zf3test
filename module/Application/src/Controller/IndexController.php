@@ -45,6 +45,15 @@ class IndexController extends AbstractActionController
     //}
     // ### CUSTOM ###
 
+    // ### CUSTOM ###
+    // added optional constructor
+    public function __construct()
+    {
+//        echo 111;
+//        exit;
+    }
+    // ### CUSTOM ###
+    
     public function indexAction()
     {
         return new ViewModel();
@@ -73,9 +82,10 @@ class IndexController extends AbstractActionController
         //$stmt->getSql();// to see the query
         //$result = $stmt->execute();// to execute the statment. returned: Zend\Db\Adapter\Driver\Pdo\Result
         //$result = $adapter->query('SELECT * FROM `users`', Adapter::QUERY_MODE_EXECUTE);// this will make the statement and execute, some dbs don't support preparation, so you can only exeecute directly
-        //$result->count();// total result fetched (int)
-        //$result->current();// current row selected (which is first)
-        //$result->next();// bring next row (pointer moves forward). if no row found will return false
+        //readme($result->count());// total result fetched (int)
+        //readme($result->current());// current row selected (which is first row), if no row found will return null
+        //readme($result->next());// bring next row (pointer moves forward). it will not return the row
+        //readme($result->current());// current row selected (which is 2nd row), if no row found will return null
         
         
         
