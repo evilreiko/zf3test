@@ -19,5 +19,6 @@ return [
         'database' => 'my_test_db',
         'username' => 'root',
         'password' => 'root',
+        'charset' => 'utf8',
     ],
 ];

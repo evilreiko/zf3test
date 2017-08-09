@@ -124,6 +124,18 @@ class IndexController extends AbstractActionController
         //$this->params()->fromPost('var_name', 'optional_fallback_value_if_not_found');// $_POST['var_name'] , 2nd param can be anything to return as fallback but if not set then returns null on fallback
         //$files = $this->params()->fromFiles();// $_FILES
         //$files = $this->params()->fromFiles('myfile');// specific entry
+        // get current route variables (parameters)
+        //$this->params()->fromRoute();// get current route's controller and all it's params in an array
+        //$this->params()->fromRoute('controller', 'abc');// get the controller, the 2nd param is optional for the default value if not available
+        //$this->params()->fromRoute('id', 123);// get the parameter [/:id], can be any variable set in the route. the 2nd param is optional for the default value if not available
+        // get from header
+        //$this->params()->fromHeader();// get all headers
+        //$this->params()->fromHeader('some_header', 'default value if not exist');// get specific header, the 2nd param is optional for the default value if not available
+        // you can use shorter version for any of them without specifing from where, like this:
+        //$this->params('var_name', 'my default value');
+
+        
+        
         
         
         
@@ -136,7 +148,9 @@ class IndexController extends AbstractActionController
         
         // set different layout
         //$this->layout()->setTemplate('layout/layout2');
-        
+        //OR shorter version
+        //$this->layout('layout/layout2');
+
         
         
         // return file steam (for download) instead of view.
@@ -240,12 +254,22 @@ class IndexController extends AbstractActionController
         
         
         
+        // redirect
+        //$this->redirect()->toRoute('home', ['action' => 'index']);// 1st param is the route name in module.config.php, 2nd param is an associative array which has the parameter options like [:action] [:id] etc
+        //$this->redirect()->toUrl('/some/route');// this will not do redirect directly, you must return; after this call to take action. you can pass "/my/url" which is absolute, or "my/url" which is relative to current route (will be appended)
+        //$this->redirect()->refresh();// this will not do refresh directly, you must return; after this call to take action.
         
         
         
         
         
-        return $viewModel;        
+        
+        
+        
+        
+        
+        
+        return $viewModel;
     }
     
     public function myjsonAction()
