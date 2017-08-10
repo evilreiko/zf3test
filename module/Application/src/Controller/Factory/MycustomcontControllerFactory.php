@@ -12,9 +12,16 @@ class MycustomcontControllerFactory implements FactoryInterface
     {
         // ContainerInterface $container is actually the service manager 
         
+        // pass db connection to controller
         // this will return to the Mycustomcont Controller at the constructor, which from here to there, you can pass any parameters
-        return new MycustomcontController(
-            $container->get(\Zend\Db\Adapter\Adapter::class)
-        );
+        //return new MycustomcontController(
+        //    $container->get(\Zend\Db\Adapter\Adapter::class)
+        //);
+        
+        // pass db connection and renderer(used to fetch a view's html inside the controller) to controller
+        $db = \Zend\Db\Adapter\Adapter::class;
+        $renderer = $container->get('Zend\View\Renderer\PhpRenderer');
+        $controller = new MycustomcontController($db, $renderer);
+        return $controller;
     }
 }

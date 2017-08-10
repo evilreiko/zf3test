@@ -1,0 +1,96 @@
+# [NC] = No Case Sensitive
+# [R]  = Redirect
+# [L]  = Last (stop after this line)
+
+RewriteEngine On
+
+# Blocked IP addresses
+Order Allow,Deny
+#single ip-address block example:
+#Deny from 192.168.0.1
+#range ip-addresses block example (192.168.0.*):
+#Deny from 192.168.0
+Allow from all
+
+# Redirect non-www to www without hardcoding. Redirect to www if 1. not local 2. not www 3. not ip address 4. for http
+#RewriteCond %{HTTP_HOST} !^local\.(.+)$ [NC]
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteCond %{HTTP_HOST} !^([0-9]([0-9]([0-9])?)?\.){3}[0-9]([0-9]([0-9])?)? [NC]
+#RewriteCond %{HTTPS} !=on [NC]
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# The below section is same as above, but for https
+# Redirect non-www to www without hardcoding. Redirect to www if 1. not local 2. not www 3. not ip address 4. for https
+#RewriteCond %{HTTP_HOST} !^local\.(.+)$ [NC]
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteCond %{HTTP_HOST} !^([0-9]([0-9]([0-9])?)?\.){3}[0-9]([0-9]([0-9])?)? [NC]
+#RewriteCond %{HTTPS} =on [NC]
+#RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# Set accessing /public/images to /images, also css,js,etc
+RewriteRule ^favicon.ico$ public/favicon.ico [L]
+RewriteRule ^css/(.*)$ public/css/$1 [L]
+RewriteRule ^fonts/(.*)$ public/fonts/$1 [L]
+RewriteRule ^img/(.*)$ public/img/$1 [L]
+RewriteRule ^js/(.*)$ public/js/$1 [L]
+RewriteRule ^robots\.txt$ public/robots.txt$1 [L]
+RewriteRule ^.*$ public/$1 [L]
+Options -Indexes
+
+# Allow video formats
+AddType video/ogg .ogv
+AddType video/mp4 .mp4
+AddType video/webm .webm
+
+# Set expire dates for images,css,js,etc (improves caching)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 seconds"
+    ExpiresByType image/x-icon "access plus 604800 seconds"
+    ExpiresByType image/jpeg "access plus 604800 seconds"
+    ExpiresByType image/png "access plus 604800 seconds"
+    ExpiresByType image/gif "access plus 604800 seconds"
+    ExpiresByType application/x-shockwave-flash "access plus 604800 seconds"
+    ExpiresByType text/css "access plus 604800 seconds"
+    ExpiresByType text/javascript "access plus 216000 seconds"
+    ExpiresByType application/x-javascript "access plus 216000 seconds"
+    ExpiresByType text/html "access plus 600 seconds"
+    ExpiresByType application/xhtml+xml "access plus 600 seconds"
+</IfModule>
+<IfModule mod_headers.c>
+    <FilesMatch "\\.(ico|jpe?g|png|gif|swf)$">
+        Header set Cache-Control "max-age=604800, public"
+    </FilesMatch>
+    <FilesMatch "\\.(css)$">
+        Header set Cache-Control "max-age=2692000, public"
+    </FilesMatch>
+    <FilesMatch "\\.(js)$">
+        Header set Cache-Control "max-age=216000, private"
+    </FilesMatch>
+    <FilesMatch "\\.(x?html?|php)$">
+        Header set Cache-Control "max-age=600, private, must-revalidate"
+    </FilesMatch>
+    Header unset ETag
+    Header unset Last-Modified
+</IfModule>
+
+# Compress by gzip:
+# The below line will only compress php files
+#php_flag zlib.output_compression on
+# While this one will compress all common files
+# source: https://css-tricks.com/snippets/htaccess/active-gzip-compression/
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/atom+xml application/javascript application/json application/ld+json application/manifest+json application/rdf+xml application/rss+xml application/schema+json application/vnd.geo+json application/vnd.ms-fontobject application/x-font-ttf application/x-javascript application/x-web-app-manifest+json application/xhtml+xml application/xml font/eot font/opentype image/bmp image/svg+xml image/vnd.microsoft.icon image/x-icon text/cache-manifest text/css text/html text/javascript text/plain text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy text/xml
+</IfModule>
+
+# Do not filter $_POST if contained any SQL-injection-like posts
+#<IfModule mod_security.c>
+#    SecFilterScanPOST Off
+#</IfModule>
+
+# Allow large file uploads (Do not change these by htaccess, if host do not allow it and we try to change it from here, it will cause an 500 internal server error)
+#php_value post_max_size 32M
+#php_value upload_max_filesize 32M
+
+# turn of magic_quotes from incoming get/post/cookie/request (Do not change these by htaccess, if host do not allow it and we try to change it from here, it will cause an 500 internal server error)
+#magic_quotes_gpc = Off
