@@ -89,6 +89,10 @@ class IndexController extends AbstractActionController
         
         
         
+        
+
+        
+        
         $viewModel = new ViewModel([
             'var1' => 'hello',
             'var2' => 111,
@@ -262,6 +266,19 @@ class IndexController extends AbstractActionController
         
         
         
+        // get view from another controller's action (or same action), then pass it as variable to the current view, then you can display it with echo $this->partial($this->htmlfromanotherview);
+        //$otherViewModel = $this->forward()->dispatch(\Application\Controller\FooController::class, ['action'=>'bar']);
+        //$otherViewModel->setTemplate('application/foo/bar');// set which template does this view use
+        //return new ViewModel([
+        //    'htmlfromanotherview' => $otherViewModel
+        //]);
+        // OR
+        // you can achieve the same if it's in the same controller, like this
+        //$otherViewModel = $this->indexAction();
+        //$otherViewModel->setTemplate('application/foo/bar');// set which template does this view use
+        //return new ViewModel([
+        //    'htmlfromanotherview' => $otherViewModel
+        //]);
         
         
         

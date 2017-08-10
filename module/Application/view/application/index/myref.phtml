@@ -201,6 +201,26 @@
     </tr>
     <tr>
         <td>
+            you can fetch a view (view model) in the controller, add it to this view model as a variable, and then that view in this view with the $this->partial() function, like this:<br/>
+        </td>
+        <td>
+            <p style='color:blue;'>
+                // in the controller<br/>
+                $otherViewModel = $this->forward()->dispatch(\Application\Controller\FooController::class, ['action'=>'bar']);<br/>
+                $otherViewModel->setTemplate('application/foo/bar');<br/>
+                return new ViewModel([<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;'htmlfromanotherview' => $otherViewModel<br/>
+                ]);<br/>
+                // in this view<br/>
+                echo $this->partial($this->htmlfromanotherview);<br/>
+            </p>
+        </td>
+        <td>
+            <?php echo $this->partial($this->htmlfromanotherview); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
             capture output (don't print it) and print output later once or multiple times
         </td>
         <td>
