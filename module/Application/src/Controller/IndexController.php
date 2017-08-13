@@ -282,7 +282,9 @@ class IndexController extends AbstractActionController
         
         
         
-        
+        // namespace and class names. getting full class name
+        //readme(IndexController::class);// returns same as below. returns the full class name as "Application\Controller\IndexController", which is the namespace + class name. this is based on relative namespace we're in
+        //readme(\Application\Controller\IndexController::class);// returns same as above. returns the full class name as "Application\Controller\IndexController", which is the namespace + class name. this is fully defined
         
         
         
