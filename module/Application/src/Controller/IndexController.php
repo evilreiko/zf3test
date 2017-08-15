@@ -288,6 +288,16 @@ class IndexController extends AbstractActionController
         
         
         
+        // when handling files, you need to know which is the current working directory (cwd)
+        // in zf3, when current working directory is set to where composer.json is: like so "/var/www/local.zf3test.com" in ubuntu or "/Application/MAMP/htdocs/zf3test"
+        //readme(getcwd()); // <<-- getcwd() is pure php function
+        // this can be changed by this:
+        //chdir('public');// if cwd is "/var/www/local.zf3test.com", this function will change it to "/var/www/local.zf3test.com/public"
+        // if add "/" in the beginning of any file reading, it will start reading from the root level. example:
+        //chdir('/var/Hi');// if cwd is "/var/www/local.zf3test.com", this function will change it to "/var/Hi"
+        
+        
+        
         return $viewModel;
     }
     
