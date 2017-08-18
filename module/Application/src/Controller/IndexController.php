@@ -298,6 +298,14 @@ class IndexController extends AbstractActionController
         
         
         
+        
+        // to call model function (without define use)
+        //\Application\Model\Sender::func1(111);// absolute path based on namepsace, which will call \Application\Model\Sender class (actual path: module/Application/src/Model/Send.php)
+        // or
+        //MycustomcontController::mystaticfunc1(111);// relative path based on namespace, which will call \Application\Controller\MycustomcontController class (actual path: module/Application/src/Model/Send.php)
+        
+        
+        
         return $viewModel;
     }
     
