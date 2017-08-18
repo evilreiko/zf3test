@@ -14,11 +14,11 @@
 return [
     // ...
     'db' => [
-        'driver' => 'Pdo_Mysql',//Pdo , try Pdo_Mysql
+        'driver' => 'Pdo_Mysql',//"Pdo", try "Pdo_Mysql"
         'hostname' => 'localhost',// optional
-        'database' => 'my_test_db',
-        'username' => 'root',
-        'password' => 'root',
+        'database' => 'xxxxxx',
+        'username' => 'xxxxxx',
+        'password' => 'xxxxxx',
         'charset' => 'utf8',
     ],
 ];

@@ -1,15 +1,24 @@
 <?php
 /**
- * Local Configuration Override
+ * Global Configuration Override
  *
- * This configuration override file is for overriding environment-specific and
- * security-sensitive configuration information. Copy this file without the
- * .dist extension at the end and populate values as needed.
+ * You can use this file for overriding configuration values from modules, etc.
+ * You would place values in here that are agnostic to the environment and not
+ * sensitive to security.
  *
- * @NOTE: This file is ignored from Git by default with the .gitignore included
- * in ZendSkeletonApplication. This is a good practice, as it prevents sensitive
- * credentials from accidentally being committed into version control.
+ * @NOTE: In practice, this file will typically be INCLUDED in your source
+ * control, so do not include passwords or other sensitive information in this
+ * file.
  */
 
 return [
+    // ...
+    'db' => [
+        'driver' => 'Pdo_Mysql',//Pdo , try Pdo_Mysql
+        'hostname' => 'localhost',// optional
+        'database' => 'my_test_db',
+        'username' => 'root',
+        'password' => 'root',
+        'charset' => 'utf8',
+    ],
 ];
