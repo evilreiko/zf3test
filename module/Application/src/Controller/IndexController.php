@@ -320,5 +320,60 @@ class IndexController extends AbstractActionController
             ]
         ]);
     }
+    
+    public function mymvcstandardjsonAction()
+    {
+        $name = isset($_GET['name']) ? $_GET['name'] : '';
+        $email = $_POST['email'];
+        $header = $_COOKIE['header'];
+        $ip = $_SERVER['ip'];
+        $file = $_FILES['doc'];
+        
+        // optionally do some basic transformation if needed, like:
+        $name = $name !== '' ? $name . 'salt' : '';// ex: edit
+        if($header === 'go') {// ex: replace
+            $header = 'come';
+        }
+        $ip = (int)$ip;// ex: typecast
+        
+        // pass the model to do the job
+        // in the model, it validate and do db changes. NO need to create table model for each table
+        $result = \Application\Model\MyModelX::insert([
+            'db'      => $this->db,
+            'caller'  => [
+                [
+                    // if caller is controller-action like in here:
+                    'controller' => 'index',
+                    'action'     => 'mymvcstandardjson',
+                    // OR if caller is in model-function
+                    'model'      => 'MyModelX',
+                    'function'   => 'myfunc1',
+                    // OR if caller is in controller-action-view
+                    'controller' => 'index',
+                    'action'     => 'mymvcstandardjson',
+                    'view'       => 'index',
+                ],// first action. in the model, the model should push 1 element to this array and pass if calling another model/function
+            ],
+            'name'    => $name,
+            'email'   => $email,
+            'header'  => $header,
+            'ip'      => $ip,
+            'file'    => $file,
+        ]);
+        
+        return $result;// the model should return something like this:
+//        return new JsonModel([
+//            'code' => '200',
+//            'msg'  => 'Registration successful',
+//            'data' => [
+//                'errors' => [// if there are errors
+//                    'input1' => 'input1 cannot be more than 20 characters',
+//                    'input2' => 'input2 must contain digits only'
+//                ],
+//                'full_name' => 'John Doe',
+//                'address' => '51 Middle st.'
+//            ]
+//        ]);
+    }
 
 }
