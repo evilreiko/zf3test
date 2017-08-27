@@ -320,5 +320,46 @@ class IndexController extends AbstractActionController
             ]
         ]);
     }
+    
+    public function mymvcstandardjsonAction()
+    {
+        $name = isset($_GET['name']) ? $_GET['name'] : '';
+        $email = $_POST['email'];
+        $header = $_COOKIE['header'];
+        $ip = $_SERVER['ip'];
+        $file = $_FILES['doc'];
+        
+        // optionally do some basic transformation if needed, like:
+        $name = $name !== '' ? $name . 'salt' : '';// ex: edit
+        if($header === 'go') {// ex: replace
+            $header = 'come';
+        }
+        $ip = (int)$ip;// ex: typecast
+        
+        // pass the model to do the job
+        // in the model, it validate and do db changes. NO need to create table model for each table
+        $result = \Application\Model\MyModelX::insert([
+            'db'      => $this->db,
+            'name'    => $name,
+            'email'   => $email,
+            'header'  => $header,
+            'ip'      => $ip,
+            'file'    => $file,
+        ]);
+        
+        return $result;// the model should return something like this:
+//        return new JsonModel([
+//            'code' => '200',
+//            'msg'  => 'Registration successful',
+//            'data' => [
+//                'errors' => [// if there are errors
+//                    'input1' => 'input1 cannot be more than 20 characters',
+//                    'input2' => 'input2 must contain digits only'
+//                ],
+//                'full_name' => 'John Doe',
+//                'address' => '51 Middle st.'
+//            ]
+//        ]);
+    }
 
 }

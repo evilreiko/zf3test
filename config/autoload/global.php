@@ -16,9 +16,9 @@ return [
     'db' => [
         'driver' => 'Pdo_Mysql',//"Pdo", try "Pdo_Mysql"
         'hostname' => 'localhost',// optional
-        'database' => 'xxxxxx',
-        'username' => 'xxxxxx',
-        'password' => 'xxxxxx',
+        'database' => 'my_test_db',
+        'username' => 'root',
+        'password' => 'root',
         'charset' => 'utf8',
-    ],
+    ],// we can place db credentials in global.php, but we should instead place it in local.php
 ];

@@ -25,7 +25,7 @@ class Module
     {
         $application = $e->getApplication();
         $config      = $application->getConfig();// this returns /Application/config/module.config.php
-        $view        = $application->getServiceManager()->get('ViewHelperManager');
+        //$view        = $application->getServiceManager()->get('ViewHelperManager');
         // You must have these keys in you application config
         //$view->headTitle($config['view']['base_title']);
 
@@ -33,6 +33,12 @@ class Module
         //$listener   = new Listeners\ViewListener();
         //$listener->setView($view);
         //$listener->attach($application->getEventManager());
+        
+        
+        // My example of getting the db and passing it to our model
+        $sm = $application->getServiceManager();// get service manager
+        $db = $sm->get(\Zend\Db\Adapter\Adapter::class);// get db connection
+        \Application\Model\MyModelX::staticFunc1($db);
     }
     // ### CUSTOM ###
     
