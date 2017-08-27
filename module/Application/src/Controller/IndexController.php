@@ -340,20 +340,6 @@ class IndexController extends AbstractActionController
         // in the model, it validate and do db changes. NO need to create table model for each table
         $result = \Application\Model\MyModelX::insert([
             'db'      => $this->db,
-            'caller'  => [
-                [
-                    // if caller is controller-action like in here:
-                    'controller' => 'index',
-                    'action'     => 'mymvcstandardjson',
-                    // OR if caller is in model-function
-                    'model'      => 'MyModelX',
-                    'function'   => 'myfunc1',
-                    // OR if caller is in controller-action-view
-                    'controller' => 'index',
-                    'action'     => 'mymvcstandardjson',
-                    'view'       => 'index',
-                ],// first action. in the model, the model should push 1 element to this array and pass if calling another model/function
-            ],
             'name'    => $name,
             'email'   => $email,
             'header'  => $header,
