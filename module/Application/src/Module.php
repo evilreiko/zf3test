@@ -56,8 +56,7 @@ class Module
         
         
         // the zend-way (best way) to use service manager setFactory and having custom factory for each model, like this:
-//        $this->sm->setFactory(\Application\Model\MyModelZ::class, \Application\Model\Factory\MyModelZFactory::class);// just register all models in the bootstrap
-//        $mymodelz = $this->sm->get(\Application\Model\MyModelZ::class);// now the object is created and retrieved
+//        $this->sm->setFactory(\Application\Model\MyModelZ::class, \Application\Model\Factory\MyModelZFactory::class);// just register all models in the bootstrap. we register them without creating, sm will create and retrieve when needed later like this: $mymodelz = $this->sm->get(\Application\Model\MyModelZ::class);
         
         
         
