@@ -342,7 +342,7 @@ class IndexController extends AbstractActionController
         
         // pass the model to do the job
         // in the model, it validate and do db changes. NO need to create table model for each table
-        $modelResponse = \Application\Model\MyModelX::insert([
+        $params = [
             'db'        => $this->db,
             'name'      => $name,
             'email'     => $email,
@@ -350,7 +350,13 @@ class IndexController extends AbstractActionController
             'ip'        => $ip,
             'file'      => $file,
             'hardcoded' => $hardcoded
-        ]);
+        ];
+        // add/edit/remove before passing
+//        $params['more'] = 'more data';// add
+//        if(isset($params['more'])) {// edit
+//            $params['more2'] = 2;
+//        }
+        $modelResponse = \Application\Model\MyModelX::insert($params);
         
         // in the model each function, should return something like this:
 //        return [
