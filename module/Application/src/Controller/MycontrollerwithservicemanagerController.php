@@ -62,8 +62,25 @@ class MycontrollerwithservicemanagerController extends AbstractActionController
         
         
         
+        
         // NOTE: maybe it's better to pass the service manager to the model constructor if you want to use it or register other models
 //        $mymodelyA = new \Application\Model\MyModelY($this->sm);
+        
+        
+        
+        
+        
+        // method 1: create on get (but can't pass params to constructor)
+        //$this->sm->setInvokableClass(\Application\Model\MyModelZ::class);// this is similar as setService() but without passing the object. the class is registered instead, but not instantiated yet. when you call the get() for first time, it will be created
+        //$mymodelz = $this->sm->get(\Application\Model\MyModelZ::class);// now the object is created and retrieved
+        // OR method 2: create on get (but can't pass params to constructor yet): you can rewrite the above line like this (method 2 is only here to show you how to do method 3):
+        //$this->sm->setFactory(\Application\Model\MyModelZ::class, \Zend\ServiceManager\Factory\InvokableFactory::class);
+        //$mymodelz = $this->sm->get(\Application\Model\MyModelZ::class);// now the object is created and retrieved
+        // OR method 3: create on get + pass params to constructor: we will rewrite it like method 2 but use our own factory for this model, by doing this, we can inject dependencies (other classes) before/after creating the object, THEN we return the object
+        $this->sm->setFactory(\Application\Model\MyModelZ::class, \Application\Model\Factory\MyModelZFactory::class);
+        $mymodelz = $this->sm->get(\Application\Model\MyModelZ::class);// now the object is created and retrieved
+        // USE METHOD 3 ALWAYS
+        
         
         
         
