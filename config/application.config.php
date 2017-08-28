@@ -72,16 +72,13 @@ return [
     // Register the services under this key
     'service_manager' => [
         'factories' => [
-            // Register service class instances here
+            // Register factories here
             // Register CurrencyConverter service.
-            CurrencyConverter::class => InvokableFactory::class
+            //\Application\Model\CurrencyConverter::class => InvokableFactory::class,
+            \Application\Model\MyModelZ::class => \Application\Model\Factory\MyModelZFactory::class,// <<<  register the all model factories here
         ],
         'invokables' => [
             // Register invokable classes here
-            //...
-        ],
-        'factories' => [
-            // Register factories here
             //...
         ],
         'abstract_factories' => [
