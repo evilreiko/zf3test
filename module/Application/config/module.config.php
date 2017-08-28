@@ -92,6 +92,24 @@ return [
             
             
             // ### CUSTOM ###
+            // TO ADD A CONTROLLER, ADD THIS..
+            // This will add controller Mycontrollerwithservicemanager which can be accessed in browser by /application/mycontrollerwithservicemanager or /application/mycontrollerwithservicemanager/index or application/mycontrollerwithservicemanager/mycustomactx
+            // Add this route for the MycontrollerwithservicemanagerController
+            'mycontrollerwithservicemanager' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/application/mycontrollerwithservicemanager[/:action]',// set the route to your controller to access the controller's actions. it can be '/mycontrollerwithservicemanager[/:action]' or even anything
+                    'defaults' => [
+                        'controller'    => Controller\MycontrollerwithservicemanagerController::class,
+                        'action'        => 'index',// default action if no action set in that route
+                    ],
+                ],
+            ],
+            // ### CUSTOM ###
+            
+            
+            
+            // ### CUSTOM ###
             // example route with variable id (there is no controller and action here, just an example for the route)
             'news' => [
                 'type'    => 'segment',
@@ -142,6 +160,20 @@ return [
                 return new Controller\MycustomcontxController(
                     $container->get(\Zend\Db\Adapter\Adapter::class)
                 );// this will pass the db adapter to the controller's constructor
+            },
+            // ### CUSTOM ###
+            
+            
+            
+            
+            // ### CUSTOM ###
+            // TO ADD A CONTROLLER, ADD THIS..
+            // this controller will will add a custom factory for it so we can pass the db (from the service manager) to the controller, WIHTOUT the need to add/use custom controller's factory
+            Controller\MycontrollerwithservicemanagerController::class => function($container) {// $container is actually the service manager
+                //return new Controller\MycontrollerwithservicemanagerController($container);// we can return the service manager
+                return new Controller\MycontrollerwithservicemanagerController(
+                    $container
+                );// this will pass the entire service manager to the controller's constructor
             },
             // ### CUSTOM ###
             

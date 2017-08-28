@@ -237,6 +237,9 @@ class IndexController extends AbstractActionController
         
         
         
+        
+        
+        
         // set global variables and constants here which are NOT enviornment-specific (not sensitive data, like session configuration): /config/autoload/global.php 
         // set global variables and constants here which are enviornment-specific (like db credentials): /config/autoload/local.php (rename the local.php.dist). NOTE: you shouldn't include this file in the VCS
         // https://olegkrivtsov.github.io/using-zend-framework-3-book/html/en/Website_Operation/Application_Configuration.html

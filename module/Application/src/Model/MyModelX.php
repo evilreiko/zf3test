@@ -1,4 +1,5 @@
 <?php
+// In this model example, we pass the $db from controller (or from anywhere) to each function (since the class is abstract)
 namespace Application\Model;
 
 abstract class MyModelX {

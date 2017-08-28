@@ -35,10 +35,27 @@ class Module
 //        $listener->attach($application->getEventManager());
         
         
+        
         // My example of getting the db and passing it to our model
         $sm = $application->getServiceManager();// get service manager
         $db = $sm->get(\Zend\Db\Adapter\Adapter::class);// get db connection
         \Application\Model\MyModelX::staticFunc1($db);
+        
+        
+        
+        // we can register model in the service manager so later we can just directly use them
+//        $mymodelyA = new \Application\Model\MyModelY($db);
+//        $sm->setService(\Application\Model\MyModelY::class, $mymodelyA);
+        // or like this for shorter: $sm->setService(\Application\Model\MyModelY::class, new \Application\Model\MyModelY($db));
+        
+        
+        
+        // or maybe better pass the entire service manager to the model instead of just the $db (if you want to use the service manager in the model), like this: 
+        //new \Application\Model\MyModelY($sm);
+        
+        
+        
+        
     }
     // ### CUSTOM ###
     
