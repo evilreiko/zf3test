@@ -328,38 +328,54 @@ class IndexController extends AbstractActionController
         $header = $_COOKIE['header'];
         $ip = $_SERVER['ip'];
         $file = $_FILES['doc'];
+        $hardcoded = 'my string';
         
         // optionally do some basic transformation if needed, like:
-        $name = $name !== '' ? $name . 'salt' : '';// ex: edit
-        if($header === 'go') {// ex: replace
-            $header = 'come';
-        }
-        $ip = (int)$ip;// ex: typecast
+//        $name = $name !== '' ? $name . 'salt' : '';// ex: edit
+//        if($header === 'go') {// ex: replace
+//            $header = 'come';
+//        }
+//        $ip = (int)$ip;// ex: typecast
         
         // pass the model to do the job
         // in the model, it validate and do db changes. NO need to create table model for each table
-        $result = \Application\Model\MyModelX::insert([
-            'db'      => $this->db,
-            'name'    => $name,
-            'email'   => $email,
-            'header'  => $header,
-            'ip'      => $ip,
-            'file'    => $file,
+        $modelResponse = \Application\Model\MyModelX::insert([
+            'db'        => $this->db,
+            'name'      => $name,
+            'email'     => $email,
+            'header'    => $header,
+            'ip'        => $ip,
+            'file'      => $file,
+            'hardcoded' => $hardcoded
         ]);
         
-        return $result;// the model should return something like this:
-//        return new JsonModel([
-//            'code' => '200',
-//            'msg'  => 'Registration successful',
-//            'data' => [
-//                'errors' => [// if there are errors
-//                    'input1' => 'input1 cannot be more than 20 characters',
-//                    'input2' => 'input2 must contain digits only'
-//                ],
+        // in the model each function, should return something like this:
+//        return [
+//            'c' => '200',// "code". always set for consistency. get from Constants.php
+//            'm' => 'Registration successful',// "message". always set for consistency. hardcoded string
+//            'p' => [// "parameters". parameters used (as they are or if replaced). always set for consistency
+//                'name' => 'XXX YYY',
+//                'email' => 'aaa@bbb.ccc',
+//            ],
+//            'e' => [// "errors". always set for consistency. if there are any errors.
+//                'input1' => 'input1 cannot be more than 20 characters',
+//                'input2' => 'input2 must contain digits only'
+//            ],
+//            'd' => [// "data". always set for consistency
 //                'full_name' => 'John Doe',
 //                'address' => '51 Middle st.'
 //            ]
-//        ]);
+//        ];
+        
+        // then finally, we can check & edit $modelResponse (optionally), and return it
+//        if($modelResponse['c'] === '201') {
+//            $modelResponse['m'] = 'Ok';
+//        }
+//        if(count($modelResponse['e'])) {
+//            $modelResponse['m'] = 'Ok with errors';
+//        }
+//        $modelResponse['d']['extra'] = 'more data';
+        return new JsonModel($modelResponse);
     }
 
 }
