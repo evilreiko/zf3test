@@ -157,7 +157,7 @@ class IndexController extends AbstractActionController
 
         
         
-        // return file steam (for download) instead of view.
+        // return file stream (for download) instead of view.
         // https://olegkrivtsov.github.io/using-zend-framework-3-book/html/en/Model_View_Controller/Disabling_the_View_Rendering.html
         //$response = $this->getResponse();// which allows you to set response data like headers and data, etc
         //return $this->getResponse();
