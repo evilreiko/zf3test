@@ -16,6 +16,14 @@ use Zend\View\Model\ViewModel;// needed if you render views
 use Zend\View\Model\JsonModel;// needed if you return json. You may need to install the component with composer: composer require zendframework/zend-json
 use Zend\Db\Adapter\Adapter;// needed if you use db. You may need to install the component with composer: composer require zendframework/zend-db
 
+use Zend\Mail;
+use Zend\Mail\Transport\Smtp as SmtpTransport;// required if using SMTP
+use Zend\Mail\Transport\SmtpOptions;// required if using SMTP
+
+use Zend\Mime\Message as MimeMessage;// to support html/images in email
+use Zend\Mime\Mime;// to support html/images in email
+use Zend\Mime\Part as MimePart;// to support html/images in email
+
 // needed if you use service manager (required to use any service(aka models)). You may need to install the component with composer: composer require zendframework/zend-servicemanager
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -306,6 +314,88 @@ class IndexController extends AbstractActionController
         //\Application\Model\Sender::func1(111);// absolute path based on namepsace, which will call \Application\Model\Sender class (actual path: module/Application/src/Model/Send.php)
         // or
         //MycustomcontController::mystaticfunc1(111);// relative path based on namespace, which will call \Application\Controller\MycustomcontController class (actual path: module/Application/src/Model/Send.php)
+        
+        
+        
+        
+        
+        // how to send simply email with zend-mail
+        // the below is REQUIRED
+//        $mail = new Mail\Message();
+//        $mail->setBody('This is the text of the email.');
+//        $mail->setFrom('Freeaqingme@example.org', "Sender's name");
+//        $mail->addTo('Matthew@example.com', 'Name of recipient');
+//        $mail->setSubject('TestSubject');
+//        
+//        // the below is OPTIONAL
+//        $mail->addCc('ralph@example.org');
+//        $mail->addBcc('enrico@example.org');
+//        $mail->addReplyTo('matthew@example.com', 'Matthew');
+//        $mail->setEncoding('UTF-8');
+//
+//        // the below is REQUIRED
+//        $transport = new Mail\Transport\Sendmail();
+//        $transport->send($mail);
+//
+//        
+//        
+//        
+//        // how to send simply email with zend-mail with SMTP
+//        // the below is REQUIRED
+//        $mail = new Mail\Message();
+//        $mail->setBody('This is the text of the email.');
+//        $mail->setFrom('Freeaqingme@example.org', "Sender's name");
+//        $mail->addTo('Matthew@example.com', 'Name of recipient');
+//        $mail->setSubject('TestSubject');
+//        
+//        // the below is OPTIONAL
+//        $mail->addCc('ralph@example.org');
+//        $mail->addBcc('enrico@example.org');
+//        $mail->addReplyTo('matthew@example.com', 'Matthew');
+//        $mail->setEncoding('UTF-8');
+//
+//        // the below is REQUIRED
+//        $transport = new SmtpTransport();
+//        $options   = new SmtpOptions([
+//            'name'              => 'localhost.localdomain',
+//            'host'              => '127.0.0.1',
+//            'port' => 587,//optional
+//            'connection_class'  => 'login',// can be "login" or "plain"
+//            'connection_config' => [
+//                'username' => 'user',
+//                'password' => 'pass',
+//                'ssl' => 'tls',//optional, value can be "ssl" or "tls"
+//            ],
+//        ]);
+//        $transport->setOptions($options);
+//        $transport->send($mail);
+//        
+//        
+//        
+//        // how to send simply email with zend-mail with html/images
+//        $htmlMarkup = '<p>some html</p>';// should be full <html> content
+//        $html = new MimePart($htmlMarkup);
+//        $html->type = Mime::TYPE_HTML;
+//        $html->charset = 'utf-8';
+//        $html->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
+//
+//        $pathToImage = 'images/something.jpg';
+//        $image = new MimePart(fopen($pathToImage, 'r'));
+//        $image->type = 'image/jpeg';
+//        $image->filename = 'image-file-name.jpg';
+//        $image->disposition = Mime::DISPOSITION_ATTACHMENT;
+//        $image->encoding = Mime::ENCODING_BASE64;
+//
+//        $body = new MimeMessage();
+//        $body->setParts([$html, $image]);
+//
+//        $mail = new Message();
+//        $mail->setBody($body);
+//
+//        $contentTypeHeader = $mail->getHeaders()->get('Content-Type');
+//        $contentTypeHeader->setType('multipart/related');
+        
+        
         
         
         
