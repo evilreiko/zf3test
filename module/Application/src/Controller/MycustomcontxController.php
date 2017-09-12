@@ -43,4 +43,11 @@ class MycustomcontxController extends AbstractActionController
     {
         return new ViewModel();      
     }
+    
+    public function hiAction()
+    {
+        // any put request will be routed to here
+        readme(111 . $_SERVER['REQUEST_METHOD']);exit;
+        return new ViewModel();      
+    }
 }

@@ -9,6 +9,7 @@ namespace Application;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
+use Zend\Router\Http\Method;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -87,6 +88,16 @@ return [
                     ],
                 ],
             ],
+            'mycustomcontxa' => [// any "put" request to any route will be routed to MycustomcontxController's hiAction()
+                'type'    => Method::class,
+                'options' => [
+                    'verb'     => 'put',// you can include comma for mulitple like "get,post,put"
+                    'defaults' => [
+                        'controller'    => Controller\MycustomcontxController::class,
+                        'action'        => 'hi',
+                    ],
+                ],
+            ],
             // ### CUSTOM ###
             
             
@@ -112,7 +123,7 @@ return [
             // ### CUSTOM ###
             // example route with variable id (there is no controller and action here, just an example for the route)
             'news' => [
-                'type'    => 'segment',
+                'type'    => Segment::class,
                 'options' => [
                     'route'       => '/news[/:action][/:id]',
                     'constraints' => [
