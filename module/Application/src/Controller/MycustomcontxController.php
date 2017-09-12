@@ -46,8 +46,22 @@ class MycustomcontxController extends AbstractActionController
     
     public function hiAction()
     {
-        // any put request will be routed to here
+        // any "put" request will be routed to here
         readme(111 . $_SERVER['REQUEST_METHOD']);exit;
+        return new ViewModel();      
+    }
+    
+    public function myaction1Action()
+    {
+        // /mycustomcontx/myaction1 with GET method
+        readme(111 . $_SERVER['REQUEST_METHOD']);exit;
+        return new ViewModel();      
+    }
+    
+    public function myaction2Action()
+    {
+        // /mycustomcontx/myaction1 with POST method
+        readme(222 . $_SERVER['REQUEST_METHOD']);exit;
         return new ViewModel();      
     }
 }

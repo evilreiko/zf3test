@@ -30,7 +30,7 @@ return [
                 'options' => [
                     'route'    => '/application/index[/:action]',// u can remove index if you don't want it, you can actually write anything here that will be your route
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => Controller\IndexController::class,// or hardcoded string as "Application\Controller\IndexController"
                         'action'     => 'index',
                     ],
                 ],
@@ -88,6 +88,11 @@ return [
                     ],
                 ],
             ],
+            // ### CUSTOM ###
+            
+            
+            
+            // ### CUSTOM ###
             'mycustomcontxa' => [// any "put" request to any route will be routed to MycustomcontxController's hiAction()
                 'type'    => Method::class,
                 'options' => [
@@ -95,6 +100,46 @@ return [
                     'defaults' => [
                         'controller'    => Controller\MycustomcontxController::class,
                         'action'        => 'hi',
+                    ],
+                ],
+            ],
+            
+            
+            
+            
+            // adding route by 
+            'mycustomcontx' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/application/mycustomcontx/myaction1',
+                    'defaults' => [
+                        'controller'    => Controller\MycustomcontxController::class,
+                        'action'        => 'myaction1',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    // sub route. This route will match "/application/mycustomcontx/myaction1" AND is GET request
+                    'mycustomcontxsubxxx' => [// <<< name
+                        'type' => Method::class,
+                        'options' => [
+                            'verb' => 'get',
+                            'defaults' => [
+                                'controller'    => Controller\MycustomcontxController::class,
+                                'action'        => 'myaction1',
+                            ],
+                        ],
+                    ],
+                    // another sub route. This route will match "/application/mycustomcontx/myaction1" AND is POST request
+                    'mycustomcontxsubyy' => [// <<< name
+                        'type' => Method::class,
+                        'options' => [
+                            'verb' => 'post',
+                            'defaults' => [
+                                'controller'    => Controller\MycustomcontxController::class,
+                                'action'        => 'myaction2',
+                            ],
+                        ],
                     ],
                 ],
             ],
