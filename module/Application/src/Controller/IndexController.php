@@ -476,5 +476,19 @@ class IndexController extends AbstractActionController
 //        $modelResponse['d']['extra'] = 'more data';
         return new JsonModel($modelResponse);
     }
+    
+    public function mygetAction()
+    {
+        readme('mygetAction');
+        readme($_SERVER['REQUEST_METHOD']);
+        exit;
+    }
+    
+    public function mypostAction()
+    {
+        readme('mypostAction');
+        readme($_SERVER['REQUEST_METHOD']);
+        exit;
+    }
 
 }

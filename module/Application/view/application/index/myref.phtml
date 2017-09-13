@@ -187,6 +187,20 @@
     </tr>
     <tr>
         <td>
+            when using parent/child routes (aka child_routes in module.config.php), you can bring the child route by parent/child names pattern<br/>
+            for example, if the parent route name is "myparentname" and literal-type for route "/application/somecontroller" and the child route name is "mychildname" and literal-type for route "/someaction", you can call it like in the following example:<br/>
+        </td>
+        <td>
+            <p style='color:blue;'>
+                echo $this->url('myparentname/mychildname');
+            </p>
+        </td>
+        <td>
+            /application/somecontroller/sub
+        </td>
+    </tr>
+    <tr>
+        <td>
             render partial view.<br/>
             note: just create a folder anywhere, for example we created "mypartials" under the /view, maybe typically place them in /view/application/TARGET_VIEW/ as "partials" for that specific view, and another folder in the /view as global partial view to be used by many different views
         </td>

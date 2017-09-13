@@ -37,6 +37,20 @@ return [
             ],
             
             
+            // ### CUSTOM ###
+            'application' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/:foo[/:bar]',// or '/:foo' or '/xxx/:foo[/:bar]', values inside brackets are optional, and values starting with ":" are variables
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,// or hardcoded string as "Application\Controller\IndexController"
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            // ### CUSTOM ###
+            
+            
             
             // ### CUSTOM ###
             // TO ADD A CONTROLLER, ADD THIS..
@@ -103,11 +117,11 @@ return [
                     ],
                 ],
             ],
+            // ### CUSTOM ###
             
             
-            
-            
-            // adding route by 
+            // ### CUSTOM ###
+            // adding child routes
             'mycustomcontx' => [
                 'type'    => Literal::class,
                 'options' => [
@@ -117,27 +131,71 @@ return [
                         'action'        => 'myaction1',
                     ],
                 ],
-                'may_terminate' => true,
-                'child_routes' => [
-                    // sub route. This route will match "/application/mycustomcontx/myaction1" AND is GET request
+                'may_terminate' => true,// this is required for route with "child_routes". If true, parent route alone will match + parent/child route will match (example ok routes: "/parent" + "/parent/child"). If false, parent route will not match, only parent/child route will match (example ok routes: "/parent/child")
+                'child_routes' => [// 2 examples in 1:
+                    // the first child will match "/application/mycustomcontx/myaction1" AND GET request, which will be handled by MycustomcontxController's myaction1Action()
                     'mycustomcontxsubxxx' => [// <<< name
                         'type' => Method::class,
                         'options' => [
                             'verb' => 'get',
                             'defaults' => [
-                                'controller'    => Controller\MycustomcontxController::class,
+                                'controller'    => Controller\MycustomcontxController::class,//in child route, controller is optional if it's already same controller
                                 'action'        => 'myaction1',
+                                // if both controller and action are not given, it will take parent route
                             ],
                         ],
                     ],
-                    // another sub route. This route will match "/application/mycustomcontx/myaction1" AND is POST request
-                    'mycustomcontxsubyy' => [// <<< name
+                    // the 2nd child will match "/application/mycustomcontx/myaction1/sub" AND ANY request method, which will be handled by IndexController's myrefAction()
+                    'subaction' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route'    => '/sub',
+                            'defaults' => [
+                                'controller'    => Controller\IndexController::class,//in child route, controller is optional if it's already same controller
+                                'action'        => 'myref',
+                                // if both controller and action are not given, it will take parent route
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            // ### CUSTOM ###
+            
+            
+            
+            
+            // ### CUSTOM ###
+            'somerandomroutename' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/xxx/yyy/zzz',
+                    'defaults' => [
+                        'controller'    => Controller\IndexController::class,
+                        'action'        => 'index',
+                    ],
+                ],
+                'may_terminate' => false,// this is required for route with "child_routes". If true, parent route alone will match + parent/child route will match (example ok routes: "/parent" + "/parent/child"). If false, parent route will not match, only parent/child route will match (example ok routes: "/parent/child")
+                'child_routes' => [// 2 examples in 1:
+                    // the first child will match "/application/mycustomcontx/myaction1" AND GET request, which will be handled by MycustomcontxController's myaction1Action()
+                    'somerandomroutenamewithget' => [// <<< name
+                        'type' => Method::class,
+                        'options' => [
+                            'verb' => 'get',
+                            'defaults' => [
+                                'controller'    => Controller\IndexController::class,//in child route, controller is optional if it's already same controller
+                                'action'        => 'myget',
+                                // if both controller and action are not given, it will take parent route
+                            ],
+                        ],
+                    ],
+                    'somerandomroutenamewithpost' => [// <<< name
                         'type' => Method::class,
                         'options' => [
                             'verb' => 'post',
                             'defaults' => [
-                                'controller'    => Controller\MycustomcontxController::class,
-                                'action'        => 'myaction2',
+                                'controller'    => Controller\IndexController::class,//in child route, controller is optional if it's already same controller
+                                'action'        => 'mypost',
+                                // if both controller and action are not given, it will take parent route
                             ],
                         ],
                     ],
