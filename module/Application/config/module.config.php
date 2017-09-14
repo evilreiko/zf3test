@@ -38,7 +38,7 @@ return [
             
             
             // ### CUSTOM ###
-            'application' => [
+            'applicationzzz' => [
                 'type'    => Segment::class,
                 'options' => [
                     'route'    => '/:foo[/:bar]',// or '/:foo' or '/xxx/:foo[/:bar]', values inside brackets are optional, and values starting with ":" are variables
@@ -122,7 +122,7 @@ return [
             
             // ### CUSTOM ###
             // adding child routes
-            'mycustomcontx' => [
+            'mycustomcontxxx' => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/application/mycustomcontx/myaction1',
