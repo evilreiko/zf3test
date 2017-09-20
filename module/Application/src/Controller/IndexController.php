@@ -265,10 +265,11 @@ class IndexController extends AbstractActionController
          
         // module-level development config files: module.config.php
         
-        // how it works:
-        // 1) application.config.php loaded first
-        // 2) then module config files
-        // 3) then extra config files
+        // how it works (which one loaded first in order):
+        //                                                     WHICH ONE LOADED FIRST IN ASC     WHICH ONE STRONGER
+        // 1) application.config.php loaded first              1                                 2
+        // 2) then module config files (module.config.php)     2                                 3
+        // 3) then extra config files (global.php+local.php)   3                                 1
         
         
         
