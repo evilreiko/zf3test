@@ -248,8 +248,11 @@ class IndexController extends AbstractActionController
         
         
         
-        // set global variables and constants here which are NOT enviornment-specific (not sensitive data, like session configuration): /config/autoload/global.php 
-        // set global variables and constants here which are enviornment-specific (like db credentials): /config/autoload/local.php (rename the local.php.dist). NOTE: you shouldn't include this file in the VCS
+        // set global variables and constants here which ARE NOT enviornment-specific (not sensitive data, like session configuration): /config/autoload/global.php 
+        // set global variables and constants here which ARE enviornment-specific (like db credentials): /config/autoload/local.php (rename the local.php.dist). NOTE: you shouldn't include this file in the VCS
+        // NOTE:
+        //       /config/autoload/local.php.dist = is included in VCS, and it should only serve as template
+        //       /config/autoload/local.php      = should NOT be included in VCS, and it should contain production database credentials for production (manually edited). in local development, it should contain user-defined database credentials
         // https://olegkrivtsov.github.io/using-zend-framework-3-book/html/en/Website_Operation/Application_Configuration.html
         
         // application-level development config files
@@ -258,6 +261,7 @@ class IndexController extends AbstractActionController
         // this is useful to enable/disable things for development only, like disabling cache or enabling testing tools
         // don't include this file in VCS, instead include the /config/development.config.php.dist in the VCS
         // same thing for development.local.php and development.local.php.dist
+        // when we do "composer development-disable", development.* files will be removed. So for example in production caching becomes enabled
          
         // module-level development config files: module.config.php
         

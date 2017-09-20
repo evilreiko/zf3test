@@ -14,11 +14,14 @@
 return [
     // ...
     'db' => [
-        'driver' => 'Pdo_Mysql',//Pdo , try Pdo_Mysql
+        'driver' => 'Pdo_Mysql',//"Pdo", try "Pdo_Mysql"
         'hostname' => 'localhost',// optional
         'database' => 'my_test_db',
         'username' => 'root',
         'password' => 'root',
         'charset' => 'utf8',
     ],
+    //=========================================
+    // IMPORTANT NOTE: local.php.dist serves as template, you should use local.php and edited manually for production and for local development (each user)
+    //=========================================
 ];
