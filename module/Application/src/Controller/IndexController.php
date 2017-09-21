@@ -404,6 +404,41 @@ class IndexController extends AbstractActionController
         
         
         
+        // captcha with image (composer require zendframework/zend-captcha)
+//        $captcha = new \Zend\Captcha\Image([
+//            'name'    => 'foo',
+//            'wordLen' => 3,
+//            'timeout' => 300,
+//            // below is related to image
+//            'font' => '/Applications/MAMP/htdocs/zf3test/public/img/Arial.ttf',
+//            'width' => 100,
+//            'height' => 60,
+//            'fontSize' => 30,
+//            'dotNoiseLevel' => 20,//mt_rand(20, 40),
+//            'lineNoiseLevel' => 20,//mt_rand(10, 15),
+//            'imgDir' => '/Applications/MAMP/htdocs/zf3test/public/img/',
+//            'imgUrl' => '/img/',
+//            'useNumbers' => false,// may include numbers if set to true
+//        ]);
+//        $id = $captcha->generate();// also image name
+//        $word = $captcha->getWord();
+//        
+//        // On a subsequent request:
+//        // Assume a captcha setup as before, with corresponding form fields, the value
+//        // of $_POST['foo'] would be a key/value array containing:
+//        // - id => captcha ID
+//        // - input => captcha value
+//        //if ($captcha->isValid($_POST['foo'], $_POST)) {// 2nd param of isValid is optional
+//        if ((new \Zend\Captcha\Image())->isValid(['id' => 'cb6f8e142ab475bbaeaa7753f9a6311a', 'input' => 'zau'])) {// 2nd param of isValid is optional
+//            // Validated!
+//            echo 'valid';
+//        } else {
+//            echo 'invalid';
+//        }
+        
+        
+        
+        
         return $viewModel;
     }
     
