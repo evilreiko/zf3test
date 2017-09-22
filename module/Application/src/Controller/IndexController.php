@@ -439,6 +439,28 @@ class IndexController extends AbstractActionController
         
         
         
+        
+        // how to set and get base path
+//        $request = $this->getRequest();
+//        // before setting base path
+//        readme($request->getBaseUrl());// output: ""
+//        $request->setBaseUrl('sub/sub2');
+//        // after setting base path
+//        readme($request->getBaseUrl());// output: "sub/sub2"
+//        
+//        $helper = $this->sm->get('ViewHelperManager')->get('BasePath');// you can also pass "ServerUrl" for full/absolute url
+//        // you can use it as:
+//        readme($helper->__invoke('/foo'));
+//        // or this:
+//        readme($helper('/foo'));
+//        
+//        readme($helper->__invoke(''));// output: "sub/sub2/"
+//        readme($helper->__invoke('/'));// output: "sub/sub2/"
+//        readme($helper->__invoke('/foo'));// output: "sub/sub2/foo"
+//        readme($helper->__invoke('/foo/x'));// output: "sub/sub2/foo/x"
+        
+        
+        
         return $viewModel;
     }
     
