@@ -440,7 +440,7 @@ class IndexController extends AbstractActionController
         
         
         
-        // how to set and get base path
+        // how to set and get base path. easy usage in controller
 //        $request = $this->getRequest();
 //        // before setting base path
 //        readme($request->getBaseUrl());// output: ""
@@ -448,6 +448,10 @@ class IndexController extends AbstractActionController
 //        // after setting base path
 //        readme($request->getBaseUrl());// output: "sub/sub2"
 //        
+//        // in view:
+//        $this->basePath() or $this->serverUrl();
+//        
+//        // You can get the basepath and serverurl functions from the service manager to be used anywhere, not just in controller
 //        $helper = $this->sm->get('ViewHelperManager')->get('BasePath');// you can also pass "ServerUrl" for full/absolute url
 //        // you can use it as:
 //        readme($helper->__invoke('/foo'));
