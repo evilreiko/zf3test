@@ -466,7 +466,7 @@ class IndexController extends AbstractActionController
         
         
         
-        // mysql transaction
+//        // mysql transaction (for innodb only, myisam will continue the queries and commit but the rollback will not do anything)
 //        $db = new Adapter([
 //            'driver'   => 'Pdo_Mysql',// Pdo_Mysql or Mysqli or else..
 //            'database' => 'my_test_db',
