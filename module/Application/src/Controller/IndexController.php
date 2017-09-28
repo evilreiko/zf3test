@@ -98,9 +98,9 @@ class IndexController extends AbstractActionController
         
         
         
+        
+        
 
-        
-        
         $viewModel = new ViewModel([
             'var1' => 'hello',
             'var2' => 111,
@@ -462,6 +462,33 @@ class IndexController extends AbstractActionController
 //        readme($helper->__invoke('/'));// output: "sub/sub2/"
 //        readme($helper->__invoke('/foo'));// output: "sub/sub2/foo"
 //        readme($helper->__invoke('/foo/x'));// output: "sub/sub2/foo/x"
+        
+        
+        
+        
+        // mysql transaction
+//        $db = new Adapter([
+//            'driver'   => 'Pdo_Mysql',// Pdo_Mysql or Mysqli or else..
+//            'database' => 'my_test_db',
+//            'username' => 'root',
+//            'password' => 'root',
+//        ]);
+//        $db->getDriver()->getConnection()->beginTransaction();// we may undo the following changes if any exception happened
+//        // our group of queries
+//        try {
+//            $result = $db->query('INSERT INTO `users` (`name`,`email`) VALUE ("3", "aaa")', Adapter::QUERY_MODE_EXECUTE);
+//            throw new \Exception('My exception error message.');// use "\Exception", or define "use \Exception" in top of file to use only "Exception"
+//            $result = $db->query('UPDATE `users` SET `email`="xxx" WHERE `id`=4', Adapter::QUERY_MODE_EXECUTE);
+//            $db->getDriver()->getConnection()->commit();// all done successfully, we're safe, this tells the connection to end transaction
+//        } catch(\Exception $e) {// use "\Exception", or define "use \Exception" in top of file to use only "Exception"
+//            $db->getDriver()->getConnection()->rollback();// undo all changes since start of beginTransaction(), this tells the connection to end transaction
+//        }
+        
+        
+        
+        // get last insert id of mysql in zf3
+        //$db->getDriver()->getConnection()->getLastGeneratedValue();
+        
         
         
         
