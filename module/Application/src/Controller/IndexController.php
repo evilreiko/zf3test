@@ -475,14 +475,16 @@ class IndexController extends AbstractActionController
 //        ]);
 //        $db->getDriver()->getConnection()->beginTransaction();// we may undo the following changes if any exception happened
 //        // our group of queries
+//        // normally the process is: when any exception occurs (do or non-db), you may or may not want to commit or rollback
 //        try {
-//            $result = $db->query('INSERT INTO `users` (`name`,`email`) VALUE ("3", "aaa")', Adapter::QUERY_MODE_EXECUTE);
-//            throw new \Exception('My exception error message.');// use "\Exception", or define "use \Exception" in top of file to use only "Exception"
-//            $result = $db->query('UPDATE `users` SET `email`="xxx" WHERE `id`=4', Adapter::QUERY_MODE_EXECUTE);
+//            $result = $db->query('INSERT INTO `users` (`name`,`email`) VALUE ("3", "ccc")', Adapter::QUERY_MODE_EXECUTE);
+//            //throw new \Exception('My exception error message.');// use "\Exception", or define "use \Exception" in top of file to use only "Exception"
+//            $result = $db->query('UPDATE `users` SET `email`="ABC" WHERE `id`=4', Adapter::QUERY_MODE_EXECUTE);
 //            $db->getDriver()->getConnection()->commit();// all done successfully, we're safe, this tells the connection to end transaction
 //        } catch(\Exception $e) {// use "\Exception", or define "use \Exception" in top of file to use only "Exception"
 //            $db->getDriver()->getConnection()->rollback();// undo all changes since start of beginTransaction(), this tells the connection to end transaction
 //        }
+//        echo 111;exit;
         
         
         
