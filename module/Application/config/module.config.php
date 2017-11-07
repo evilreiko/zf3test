@@ -37,11 +37,22 @@ return [
             ],
             
             
+            /*
+             * NOTE::
+             * 'route' => '/application/mycontroller[/:action]', will match:
+             * /application/mycontroller            << index action of that controller since we set the controller and action in the controller
+             * /application/mycontroller/myaction   << any existing action in that controller (including index action)
+             * but will not match the below:
+             * /application/mycontroller/           << with ending slash. to match this as well, we should use the following instead:
+             * 'route' => '/application/mycontroller[/[:action]]'
+             */
+            
+            
             // ### CUSTOM ###
             'applicationzzz' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/:foo[/:bar]',// or '/:foo' or '/xxx/:foo[/:bar]', values inside brackets are optional, and values starting with ":" are variables
+                    'route'    => '/:foo[/:bar]',// or '/:foo' or '/xxx/:foo[/:bar]', values inside brackets are optional, and values starting with ":" are variables.
                     'defaults' => [
                         'controller' => Controller\IndexController::class,// or hardcoded string as "Application\Controller\IndexController"
                         'action'     => 'index',
@@ -59,11 +70,13 @@ return [
             'foo' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/application/foo[/:action]',// set the route to your controller to access the controller's actions. it can be '/foo[/:action]' or even anything
+                    'route'    => '/application/foo[/:action][/:somevar]',// set the route to your controller to access the controller's actions. it can be '/foo[/:action]' or even anything
                     'defaults' => [
                         'controller'    => Controller\FooController::class,
                         'action'        => 'index',// default action if no action set in that route
+                        'somevar'       => 'someval',// optionally we can set default value if this is not given
                     ],
+                    // note: we can set any key/value in the defaults. for parameter variables we can fetch them in the controller with $this->params()->fromRoute('somevar') << this function also accept 2nd parameter as default value if variable not found
                 ],
             ],
             // ### CUSTOM ###
